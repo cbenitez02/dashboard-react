@@ -1,0 +1,83 @@
+.list{
+  display: flex;
+  flex-direction: column;
+
+  .listButtom{
+    width: 98%;
+    margin: 20px auto;
+    font-size: 24px;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .link{
+      text-decoration: none;
+      color: green;
+      font-size: 16px;
+      font-weight: 400;
+      border: 1px solid green;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 5px;
+      transition: all 300ms ease;
+
+      &:hover{
+        background-color: green;
+        color: white;
+      }
+    }
+  }
+
+  .table{
+    .cellWrapper{
+      display: flex;
+      align-items: center;
+  
+      .image{
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        margin-right: 10px;
+        object-fit: cover;
+      }
+    }
+  
+    .status{
+      padding: 5px;
+      border-radius: 5px;
+  
+      &.Approved{
+        color: green;
+        background-color: rgba(0, 128, 0, 0.151);
+      }
+      &.Pending{
+        color: crimson;
+        background-color: rgba(220, 20, 60, 0.151);
+      }
+    }
+
+    .viewButton{
+      font-size: 14px;
+      padding: 3px 5px;
+      width: max-content;
+      border-radius: 5px;
+      color: darkblue;
+      border: 1px dotted darkblue;
+      cursor: pointer;
+    }
+
+    .deleteButton{
+      padding: 3px 5px;
+      width: max-content;
+      border-radius: 5px;
+      color: crimson;
+      border: 1px dotted crimson;
+      cursor: pointer;
+    }
+    .buttonCell{
+      display: flex;
+      gap: 20px;
+    }
+  }
+}
