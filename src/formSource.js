@@ -80,3 +80,5 @@ export const productInputs = [
     placeholder: "in stock",
   },
 ];
+
+

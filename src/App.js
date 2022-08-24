@@ -9,6 +9,7 @@ import './style/dark.scss'
 import { DarkModeContext } from "./context/darkModeContext";
 import { useContext } from "react";
 import ProductsList from "./pages/products/ProductsList";
+import Orders from "./pages/orders/Orders";
 
 function App() {
 
@@ -30,6 +31,10 @@ function App() {
               <Route index element={<ProductsList />}/>
               <Route path=":productid"/>
               <Route path="new" element={<New inputs = {productInputs} title="Add New Product"/>} />
+            </Route>
+            <Route path="orders">
+              <Route index element={<Orders />}/>
+              <Route path=":orderid"/>
             </Route>
           </Route>
         </Routes>
