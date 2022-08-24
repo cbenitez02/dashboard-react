@@ -1,28 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { createDataOrder } from '../../dataOrders';
-import { userRows } from '../../datatablesource';
+import React from "react";
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { createDataOrder } from "../../dataOrders";
+import { userRows } from "../../datatablesource";
+import "./orderstable.scss";
 
 export function Row(props) {
   const { row } = props;
-  const  [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -35,10 +36,16 @@ export function Row(props) {
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
-        <TableCell align="right">{row.id}</TableCell>
-        <TableCell align="right">{row.date}</TableCell>
-        <TableCell align="right">{row.client}</TableCell>
-        <TableCell align="right">{row.status}</TableCell>
+        <TableCell align="center">{row.id}</TableCell>
+        <TableCell align="center">{row.date}</TableCell>
+        <TableCell align="center">{row.client}</TableCell>
+        <TableCell align="center">
+          <div className="status">
+            <span className={row.status === "Completed" ? "active" : "passive"}>
+              {row.status}
+            </span>
+          </div>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -51,9 +58,9 @@ export function Row(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell>ID Customer</TableCell>
+                    <TableCell align="center">Amount</TableCell>
+                    <TableCell align="center">Total price ($)</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -63,8 +70,8 @@ export function Row(props) {
                         {historyRow.date}
                       </TableCell>
                       <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
+                      <TableCell align="center">{historyRow.amount}</TableCell>
+                      <TableCell align="center">
                         {Math.round(historyRow.amount * row.price * 100) / 100}
                       </TableCell>
                     </TableRow>
@@ -76,7 +83,7 @@ export function Row(props) {
         </TableCell>
       </TableRow>
     </React.Fragment>
-  )
+  );
 }
 
 Row.propTypes = {
@@ -89,7 +96,7 @@ Row.propTypes = {
         amount: PropTypes.number.isRequired,
         customerId: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
-      }),
+      })
     ).isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -98,13 +105,47 @@ Row.propTypes = {
 };
 
 const rows = [
-  createDataOrder('Frozen yoghurt', 159, "2020-01-05", userRows[0].id, "Pending" , 3099),
-  createDataOrder('Ice cream sandwich', 237, "2020-01-05", userRows[1].id, "Completed", 4199),
-  createDataOrder('Eclair', 262, "2020-01-05",userRows[2].id, "Completed", 3.79),
-  createDataOrder('Cupcake', 305, "2020-01-05", userRows[3].id, "Pending", 120),
-  createDataOrder('Gingerbread', 356, "2020-01-05", userRows[4].id, "Completed", 125),
+  createDataOrder(
+    "Frozen yoghurt",
+    159,
+    "2020-01-05",
+    userRows[0].username,
+    "Pending",
+    3099
+  ),
+  createDataOrder(
+    "Ice cream sandwich",
+    237,
+    "2020-01-05",
+    userRows[1].username,
+    "Completed",
+    4199
+  ),
+  createDataOrder(
+    "Eclair",
+    262,
+    "2020-01-05",
+    userRows[2].username,
+    "Completed",
+    3.79
+  ),
+  createDataOrder(
+    "Cupcake",
+    305,
+    "2020-01-05",
+    userRows[3].username,
+    "Pending",
+    120
+  ),
+  createDataOrder(
+    "Gingerbread",
+    356,
+    "2020-01-05",
+    userRows[4].username,
+    "Completed",
+    125
+  ),
 ];
-
 
 const OrdersTable = () => {
   return (
@@ -114,10 +155,10 @@ const OrdersTable = () => {
           <TableRow>
             <TableCell />
             <TableCell>Order</TableCell>
-            <TableCell align="right">Id</TableCell>
-            <TableCell align="right">Date</TableCell>
-            <TableCell align="right">Client</TableCell>
-            <TableCell align="right">Status</TableCell>
+            <TableCell align="center">ID</TableCell>
+            <TableCell align="center">Date</TableCell>
+            <TableCell align="center">Client</TableCell>
+            <TableCell align="center">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -128,6 +169,6 @@ const OrdersTable = () => {
       </Table>
     </TableContainer>
   );
-}
+};
 
-export default OrdersTable
+export default OrdersTable;
